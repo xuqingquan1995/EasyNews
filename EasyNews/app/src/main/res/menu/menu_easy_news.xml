@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/news"
+          android:title="@string/app_name"/>
+
+    <item android:id="@+id/feedback"
+          android:title="@string/feedback"/>
+
+    <item android:title="@string/checkUpdate"
+          android:id="@+id/checkUpdate"/>
+
+    <item android:id="@+id/edit_category"
+          android:title="@string/edit_category"/>
+
+</menu>

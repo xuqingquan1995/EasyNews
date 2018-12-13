@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="news" type="top.xuqingquan.easynews.model.entity.NewsItem"/>
+        <variable name="time" type="String"/>
+        <variable name="clickListener" type="android.view.View.OnClickListener"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_margin="2dp"
+            app:cardCornerRadius="4dp"
+            android:onClick="@{clickListener}">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginBottom="2dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:text="@{news.title}"/>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_alignParentBottom="true">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp"
+                        android:gravity="start"
+                        android:text="@{news.source}"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp"
+                        android:gravity="end"
+                        android:text="@{time}"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

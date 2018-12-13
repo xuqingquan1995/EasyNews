@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xuqingquan.easynews.dao.NewsItemDao">
+
+    <insert id="addNews" parameterType="NewsItem" useGeneratedKeys="true" keyProperty="newsId" >
+        insert ignore into tb_news(`id`,`title`,`link`,`pubDate`,`source`,`desc`,`channelId`,`channelName`,`nid`,`content`,`html`) values
+            (#{id},#{title},#{link},#{pubDate},#{source},#{desc},#{channelId},#{channelName},#{nid},#{content},#{html})
+    </insert>
+
+    <select id="getNewsList" resultType="NewsItem" parameterType="Map">
+        select `newsId`,`title`,`link`,`pubDate`,`source` from tb_news where true
+        <if test="start != null and start > 0">
+            and newsId &lt; #{start}
+        </if>
+        <if test="channelName != null and !''.equals(channelName)">
+            and  channelName like  concat('%',#{channelName},'%')
+        </if>
+        <if test="pubDate !=null and !''.equals(pubDate)">
+            and pubDate &gt; #{pubDate}
+        </if>
+        <if test="source != null and !''.equals(source)">
+            and source = #{source}
+        </if>
+        <if test="title != null and !''.equals(title)">
+            and  title like  concat('%',#{title},'%')
+        </if>
+        <if test="according != null and !''.equals(according) ">
+            order by ${according}
+        </if>
+        <if test="direction != null and !''.equals(direction) ">
+            ${direction}
+        </if>
+        <if test="limit != null">
+            limit #{limit}
+        </if>
+    </select>
+
+</mapper>

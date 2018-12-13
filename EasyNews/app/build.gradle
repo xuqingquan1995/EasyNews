@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+def keystorePSW = ''
+def keystoreAlias = ''
+def keystoreAliasPSW = ''
+def keystoreFilepath = project.rootProject.file('easynews.jks')
+
+if (keystoreFilepath) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    keystorePSW = properties.getProperty("keystore.storePassword")
+    keystoreAlias = properties.getProperty("keystore.keyAlias")
+    keystoreAliasPSW = properties.getProperty("keystore.keyPassword")
+}
+
+android {
+    compileSdkVersion 28
+    dataBinding {
+        enabled = true
+    }
+    defaultConfig {
+        applicationId "top.xuqingquan.easynews"
+        minSdkVersion 18
+        targetSdkVersion 28
+        versionCode 1
+        versionName "0.1"
+        vectorDrawables.useSupportLibrary true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        externalNativeBuild {
+//            cmake {
+//                cppFlags "-frtti -fexceptions"
+//            }
+//        }
+    }
+    signingConfigs {
+        easynews {
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPSW
+            storeFile keystoreFilepath
+            storePassword keystorePSW
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            //是否移除无用资源
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名文件存在，则签名
+            if (keystoreFilepath.exists()) {
+                println("WITH -> buildTypes -> release: using jks key")
+                signingConfig signingConfigs.easynews
+            } else {
+                println("WITH -> buildTypes -> release: using default key")
+            }
+        }
+    }
+//    externalNativeBuild {
+//        cmake {
+//            path "CMakeLists.txt"
+//        }
+//    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'//说明so的路径为该libs路径，关联所有so文件
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs' //就是你放aar的目录地址
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.10'
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation 'androidx.room:room-runtime:2.0.0'
+    implementation 'androidx.room:room-rxjava2:2.0.0'
+    implementation 'androidx.paging:paging-runtime-ktx:2.1.0-beta01'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
+
+    implementation 'android.arch.work:work-runtime-ktx:1.0.0-alpha11'
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    kapt 'androidx.room:room-compiler:2.0.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+}

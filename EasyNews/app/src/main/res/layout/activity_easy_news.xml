@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".view.EasyNewsActivity">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme.AppBarOverlay">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
+                        app:titleEnabled="false"
+                        app:toolbarId="@+id/toolbar">
+
+                    <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            app:layout_collapseMode="none"
+                            app:contentInsetStart="0dp"
+                            app:contentInsetEnd="35dp"
+                            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                        <TextView
+                                android:id="@+id/search_box"
+                                android:text="@string/search"
+                                android:paddingStart="5dp"
+                                android:paddingEnd="5dp"
+                                android:paddingTop="2dp"
+                                android:drawablePadding="5dp"
+                                android:paddingBottom="2dp"
+                                android:drawableStart="@drawable/ic_search"
+                                android:textColor="@android:color/darker_gray"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:visibility="gone"
+                                android:background="@drawable/bg_edittext_selector"/>
+                    </androidx.appcompat.widget.Toolbar>
+
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <fragment
+                    android:id="@+id/news_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_easy_news"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navigation_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.NavigationView"
+                android:layout_gravity="start"
+                app:headerLayout="@layout/nav_header"
+                app:menu="@menu/menu_easy_news"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

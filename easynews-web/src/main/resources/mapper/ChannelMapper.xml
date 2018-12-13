@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.xuqingquan.easynews.dao.ChannelDao">
+
+    <insert id="addChannelList" parameterType="java.util.List">
+        insert ignore into tb_channel(`channelId`, `name`) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.channelId},#{item.name})
+        </foreach>
+    </insert>
+
+</mapper>

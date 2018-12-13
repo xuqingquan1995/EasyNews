@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable name="news" type="top.xuqingquan.easynews.model.entity.NewsItem"/>
+        <variable name="time" type="String"/>
+        <variable name="image1" type="String"/>
+        <variable name="image2" type="String"/>
+        <variable name="image3" type="String"/>
+        <variable name="clickListener" type="android.view.View.OnClickListener"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_margin="2dp"
+            app:cardCornerRadius="4dp"
+            android:onClick="@{clickListener}">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginBottom="2dp">
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:padding="3dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:text="@{news.title}"/>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:padding="1dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="102dp">
+
+                    <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitXY"
+                            app:imageFromUrl="@{image1}"
+                            android:contentDescription="@string/first_pic"/>
+
+                    <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitXY"
+                            app:imageFromUrl="@{image2}"
+                            android:contentDescription="@string/second_pic"/>
+
+                    <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_weight="1"
+                            android:scaleType="fitXY"
+                            app:imageFromUrl="@{image3}"
+                            android:contentDescription="@string/third_pic"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_alignParentBottom="true">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp"
+                        android:gravity="start"
+                        android:text="@{news.source}"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="12sp"
+                        android:gravity="end"
+                        android:text="@{time}"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

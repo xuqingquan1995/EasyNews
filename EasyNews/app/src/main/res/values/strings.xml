@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">简单资讯</string>
+    <string name="version">Version 0.1</string>
+    <string name="feedback">问题反馈</string>
+    <string name="checkUpdate">检查更新</string>
+    <string name="edit_category">编辑类别</string>
+    <string name="search">搜你所想</string>
+    <string name="first_pic">新闻列表的第一张图</string>
+    <string name="second_pic">新闻列表的第二张图</string>
+    <string name="third_pic">新闻列表的第三张图</string>
+    <string name="loading">加载中…</string>
+    <string name="click_to_retry">点击重试</string>
+    <string name="recommended">推荐</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_news_item">NewsItemActivity</string>
+
+</resources>
